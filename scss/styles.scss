@@ -1,0 +1,103 @@
+// Import Bourbon: Requires Codekit or the bower component
+@import "bourbon";
+
+//
+// Variables
+//
+
+// Here we set the popout container appearance
+$popout-bg:                          #ffffff !default;
+$popout-border-color:           #bcbdc0 !default;
+$popout-border-size:            2px !default;
+$popout-border-radius:         35px !default;
+
+// Here we set the popout container size, may need to be adjusted according to content
+$popout-width:                      380px !default;
+$popout-height:                     450px !default;
+
+// Here we set the popout control handle styles
+$popout-control-bg:                      #df1766 !default;
+$popout-control-width:                  $popout-border-radius !default; // Same as border radius
+$popout-control-function-factor:    .5 !default; // Decimal between 0 and 1
+
+// Here we set the popout content styles
+$popout-content-padding:            20px !default;
+
+//
+// Styles
+//
+
+.popout  {
+  // Popout background and sizing
+  @include size($popout-width $popout-height);
+  background: $popout-bg;
+  overflow: hidden;
+
+  // Position the popout middle right
+  @include position(fixed, 50% 0 null null);
+  margin-top: -($popout-height / 2);
+
+  // This sets it to close initially
+  right: -($popout-width - $popout-control-width);
+
+  // Popout border
+  @include border-left-radius($popout-border-radius);
+  border: $popout-border-size solid $popout-border-color;
+  border-right: none;
+
+  & > .popout-control {
+    @include size($popout-control-width 100%);
+    background: $popout-control-bg;
+    position: relative;
+    cursor: pointer; // fallback for browsers that don't have w-resize
+    cursor: w-resize;
+
+    // Here we set the basic styles of the popout control arrow
+    &:after {
+      display: block;
+      content: " ";
+
+      // Positioning of the arrow
+      @include position(absolute, 50% null null 25%);
+      margin-top: -($popout-control-width * $popout-control-function-factor);
+
+      // This sets the actual arrow size and color
+      border-top: ($popout-control-width * $popout-control-function-factor) solid transparent;
+      border-bottom: ($popout-control-width * $popout-control-function-factor) solid transparent;
+
+      // Initial state of arrow should point left, border right sets this
+      border-right: ($popout-control-width * $popout-control-function-factor) solid rgba(white, .75);
+      border-left: none;
+    }
+  }
+
+  & > .popout-content {
+
+    // Set the position and size of the popout content
+    @include position(absolute, 0 0 null null);
+    @include size($popout-width - $popout-control-width 100%);
+    padding: $popout-content-padding;
+
+    // Set a max width so images don't expand outside boundaries
+    img {
+      max-width: 100%;
+    }
+  }
+
+  // Styles for when the popout is open
+  &.popout-open {
+
+    // This sets the popout to the open position
+    right: 0;
+
+    & > .popout-control {
+      cursor: e-resize;
+
+      // Set arrow to point right
+      &:after {
+        border-left: ($popout-control-width * $popout-control-function-factor) solid rgba(white, .75);
+        border-right: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.popout {
+  height: 450px;
+  width: 380px;
+  background: #ffffff;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  margin-top: -225px;
+  right: -345px;
+  border-bottom-left-radius: 35px;
+  border-top-left-radius: 35px;
+  border: 2px solid #bcbdc0;
+  border-right: none; }
+  .popout > .popout-control {
+    height: 100%;
+    width: 35px;
+    background: #df1766;
+    position: relative;
+    cursor: pointer;
+    cursor: w-resize; }
+    .popout > .popout-control:after {
+      display: block;
+      content: " ";
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      margin-top: -17.5px;
+      border-top: 17.5px solid transparent;
+      border-bottom: 17.5px solid transparent;
+      border-right: 17.5px solid rgba(255, 255, 255, 0.75);
+      border-left: none; }
+  .popout > .popout-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 345px;
+    padding: 20px; }
+    .popout > .popout-content img {
+      max-width: 100%; }
+  .popout.popout-open {
+    right: 0; }
+    .popout.popout-open > .popout-control {
+      cursor: e-resize; }
+      .popout.popout-open > .popout-control:after {
+        border-left: 17.5px solid rgba(255, 255, 255, 0.75);
+        border-right: none; }
