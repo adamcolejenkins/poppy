@@ -32,6 +32,7 @@ $popout-content-padding:            20px !default;
   @include size($popout-width $popout-height);
   background: $popout-bg;
   overflow: hidden;
+  z-index: 999999;
 
   // Position the popout middle right
   @include position(fixed, 50% 0 null null);
@@ -100,4 +101,9 @@ $popout-content-padding:            20px !default;
       }
     }
   }
+}
+@media (max-width: 750px) {
+    .popout {
+      display: none;
+    }
 }

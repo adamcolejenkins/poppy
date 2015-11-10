@@ -1,11 +1,19 @@
-(function ($, window, document) {
+/*!
+ * Popout
+ * A simple jQuery promo popout.
+ * http://adamcolejenkins.com
+ * @author Adam Jenkins <adamcole83@gmail.com>
+ * @version 1.0.1
+ * Copyright 2015. MIT licensed.
+ */
+(function ($, window, document, undefined) {
   'use strict';
 
   window.Popout = {
 
     name : 'Popout',
 
-    version : '1.0.0',
+    version : '1.0.1',
 
     options: {
       animations : {
@@ -22,6 +30,8 @@
       }
     },
 
+    locked: false,
+
     init : function () {
 
       // Check if user has closed the window. When they close, a cookie is
@@ -32,12 +42,15 @@
       }
 
       // Bind the control handle click events
-      this.bindClickEvents();
+      this.bindEvents();
 
     },
 
-    openPopout : function () {
+    openPopout : function (callback) {
       var $el = $( "." + this.options.klasses.element );
+
+      // Lock the popout so it can't be harmed
+      this.locked = true;
 
       // Animate the popout open
       $el.stop().animate({ right: 0 }, this.options.animations.speed, function () {
@@ -45,16 +58,22 @@
         // Toggle the open and close classes
         $el.toggleClass(window.Popout.options.klasses.open);
 
-        // Unset the cookie if it has been set
-        if (window.Popout.cookieIsSet()) {
-          window.Popout.unsetCookie();
+        // If a callback has been set, we will execute it
+        if ("function" === typeof callback) {
+          callback();
         }
+
+        // Unlock the popout so we can go on with life
+        window.Popout.locked = false;
 
       });
     },
 
-    closePopout : function () {
+    closePopout : function (callback) {
       var $el = $( "." + this.options.klasses.element );
+
+      // Lock the popout so it can't be harmed
+      this.locked = true;
 
       // Find the width of the popout content
       var position = -($el.outerWidth() - $el.find("." + this.options.klasses.control).outerWidth());
@@ -65,23 +84,61 @@
         // Toggle the open class
         $el.toggleClass(window.Popout.options.klasses.open);
 
-        // Set the cookie if it hasn't already been set
-        if ( ! window.Popout.cookieIsSet()) {
-          window.Popout.setCookie();
+        // If a callback has been set, we will execute it
+        if ("function" === typeof callback) {
+          callback();
         }
+
+        // Unlock the popout so we can go on with life
+        window.Popout.locked = false;
 
       });
     },
 
-    bindClickEvents : function () {
+    isOpen : function () {
+      return $( "." + this.options.klasses.element ).hasClass(this.options.klasses.open) && ! this.locked;
+    },
+
+    bindEvents : function () {
       var $el = $( "." + this.options.klasses.element );
       var $control = $el.find("." + this.options.klasses.control);
 
       $control.on("click", function () {
-        if ($el.hasClass(window.Popout.options.klasses.open)) {
-          window.Popout.closePopout();
+
+        // If the popout has the open class, let's close it
+        if (window.Popout.isOpen()) {
+
+          // Close the popout window
+          window.Popout.closePopout(function () {
+
+            // If the user triggers the popout to close, they're not interested
+            // so let's set the cookie if it hasn't already been set
+            if ( ! window.Popout.cookieIsSet()) {
+              window.Popout.setCookie();
+            }
+
+          });
         } else {
-          window.Popout.openPopout();
+
+          // Open the popout window
+          window.Popout.openPopout(function () {
+
+            // If the user triggers the popout to open, clearly they're interested
+            // so we will unset the cookie if it has been set
+            if (window.Popout.cookieIsSet()) {
+              window.Popout.unsetCookie();
+            }
+
+          });
+        }
+      });
+
+      // Close the window when the user scrolls down
+      $(window).scroll(function () {
+
+        // If the popout is open and the user scrolls, close it
+        if(window.Popout.isOpen() &&  $(window).scrollTop() > 100) {
+          window.Popout.closePopout();
         }
       });
     },
@@ -125,6 +182,7 @@
 
   };
 
+  // On your mark...get set... GO!
   $(document).ready(function () {
     window.Popout.init();
   });
