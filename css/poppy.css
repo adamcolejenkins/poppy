@@ -1,4 +1,4 @@
-.popout {
+.poppy {
   height: 450px;
   width: 380px;
   background: #ffffff;
@@ -14,7 +14,7 @@
   border: 2px solid #bcbdc0;
   border-right: none;
 }
-.popout > .popout-control {
+.poppy > .poppy-control {
   height: 100%;
   width: 35px;
   background: #df1766;
@@ -22,7 +22,7 @@
   cursor: pointer;
   cursor: w-resize;
 }
-.popout > .popout-control:after {
+.poppy > .poppy-control:after {
   display: block;
   content: " ";
   position: absolute;
@@ -34,7 +34,7 @@
   border-right: 17.5px solid rgba(255, 255, 255, 0.75);
   border-left: none;
 }
-.popout > .popout-content {
+.poppy > .poppy-content {
   position: absolute;
   top: 0;
   right: 0;
@@ -42,22 +42,22 @@
   width: 345px;
   padding: 20px;
 }
-.popout > .popout-content img {
+.poppy > .poppy-content img {
   max-width: 100%;
 }
-.popout.popout-open {
+.poppy.poppy-open {
   right: 0;
 }
-.popout.popout-open > .popout-control {
+.poppy.poppy-open > .poppy-control {
   cursor: e-resize;
 }
-.popout.popout-open > .popout-control:after {
+.poppy.poppy-open > .poppy-control:after {
   border-left: 17.5px solid rgba(255, 255, 255, 0.75);
   border-right: none;
 }
 
 @media (max-width: 750px) {
-  .popout {
+  .poppy {
     display: none;
   }
 }

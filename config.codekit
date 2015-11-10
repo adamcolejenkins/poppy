@@ -2700,11 +2700,11 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/css\/styles.css": {
+	"\/css\/poppy.css": {
 		"fileType": 16,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/css\/styles.css",
+		"inputAbbreviatedPath": "\/css\/poppy.css",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -2718,37 +2718,37 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/js\/scripts.js": {
+	"\/js\/poppy.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/scripts.js",
-		"outputAbbreviatedPath": "\/js\/scripts.min.js",
+		"inputAbbreviatedPath": "\/js\/poppy.js",
+		"outputAbbreviatedPath": "\/js\/poppy.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/scripts.min.js": {
+	"\/js\/poppy.min.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/scripts.min.js",
-		"outputAbbreviatedPath": "\/js\/scripts.min.min.js",
+		"inputAbbreviatedPath": "\/js\/poppy.min.js",
+		"outputAbbreviatedPath": "\/js\/poppy.min.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/scss\/styles.scss": {
+	"\/scss\/poppy.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/scss\/styles.scss",
-		"outputAbbreviatedPath": "\/css\/styles.css",
+		"inputAbbreviatedPath": "\/scss\/poppy.scss",
+		"outputAbbreviatedPath": "\/css\/poppy.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

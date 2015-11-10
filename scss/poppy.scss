@@ -1,0 +1,109 @@
+// Import Bourbon: Requires Codekit or the bower component
+@import "bourbon";
+
+//
+// Variables
+//
+
+// Here we set the poppy container appearance
+$poppy-bg:                          #ffffff !default;
+$poppy-border-color:           #bcbdc0 !default;
+$poppy-border-size:            2px !default;
+$poppy-border-radius:         35px !default;
+
+// Here we set the poppy container size, may need to be adjusted according to content
+$poppy-width:                      380px !default;
+$poppy-height:                     450px !default;
+
+// Here we set the poppy control handle styles
+$poppy-control-bg:                      #df1766 !default;
+$poppy-control-width:                  $poppy-border-radius !default; // Same as border radius
+$poppy-control-function-factor:    .5 !default; // Decimal between 0 and 1
+
+// Here we set the poppy content styles
+$poppy-content-padding:            20px !default;
+
+//
+// Styles
+//
+
+.poppy  {
+  // Poppy background and sizing
+  @include size($poppy-width $poppy-height);
+  background: $poppy-bg;
+  overflow: hidden;
+  z-index: 999999;
+
+  // Position Poppy middle right
+  @include position(fixed, 50% 0 null null);
+  margin-top: -($poppy-height / 2);
+
+  // This sets it to close initially
+  right: -($poppy-width - $poppy-control-width);
+
+  // Poppy border
+  @include border-left-radius($poppy-border-radius);
+  border: $poppy-border-size solid $poppy-border-color;
+  border-right: none;
+
+  & > .poppy-control {
+    @include size($poppy-control-width 100%);
+    background: $poppy-control-bg;
+    position: relative;
+    cursor: pointer; // fallback for browsers that don't have w-resize
+    cursor: w-resize;
+
+    // Here we set the basic styles of Poppy control arrow
+    &:after {
+      display: block;
+      content: " ";
+
+      // Positioning of the arrow
+      @include position(absolute, 50% null null 25%);
+      margin-top: -($poppy-control-width * $poppy-control-function-factor);
+
+      // This sets the actual arrow size and color
+      border-top: ($poppy-control-width * $poppy-control-function-factor) solid transparent;
+      border-bottom: ($poppy-control-width * $poppy-control-function-factor) solid transparent;
+
+      // Initial state of arrow should point left, border right sets this
+      border-right: ($poppy-control-width * $poppy-control-function-factor) solid rgba(white, .75);
+      border-left: none;
+    }
+  }
+
+  & > .poppy-content {
+
+    // Set the position and size of Poppy content
+    @include position(absolute, 0 0 null null);
+    @include size($poppy-width - $poppy-control-width 100%);
+    padding: $poppy-content-padding;
+
+    // Set a max width so images don't expand outside boundaries
+    img {
+      max-width: 100%;
+    }
+  }
+
+  // Styles for when Poppy is open
+  &.poppy-open {
+
+    // This sets Poppy to the open position
+    right: 0;
+
+    & > .poppy-control {
+      cursor: e-resize;
+
+      // Set arrow to point right
+      &:after {
+        border-left: ($poppy-control-width * $poppy-control-function-factor) solid rgba(white, .75);
+        border-right: none;
+      }
+    }
+  }
+}
+@media (max-width: 750px) {
+    .poppy {
+      display: none;
+    }
+}
