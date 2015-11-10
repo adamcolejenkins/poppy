@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Sass
 .sass-cache
 
@@ -19,7 +18,5 @@ $RECYCLE.BIN/
 
 ## Editor
 .codekit-cache
-=======
-.sass-cache
+
 *.css.map
->>>>>>> 3a47ba8d17442cdbaae5fb8160920384dbb42229
